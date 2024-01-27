@@ -1,0 +1,19 @@
+.launches-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.launches-table th,
+.launches-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.launches-table th {
+  background-color: #f4f4f4;
+}
+
+.launches-table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}

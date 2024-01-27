@@ -1,0 +1,21 @@
+<div *ngIf="launches && launches.length > 0; else noData">
+	<table class="launches-table">
+		<thead>
+			<tr>
+				<th>Mission Name</th>
+				<th>Launch Date</th>
+				<th>Launch Site</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let launch of launches">
+				<td>{{ launch.mission_name }}</td>
+				<td>{{ launch.launch_date_local | date }}</td>
+				<td>{{ launch.launch_site?.site_name_long || 'N/A' }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<ng-template #noData>
+	<p>No launches found.</p>
+</ng-template>
