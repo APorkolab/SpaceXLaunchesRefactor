@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { GqlResponse, Launch } from '../core/models/launch.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GraphQLService {
-  private readonly API_URL = 'https://spacex-production.up.railway.app/launches';
+export class GraphqlService {
+  private readonly API_URL = `${environment.apiUrl}/launches`;
 
   constructor(private http: HttpClient) { }
 
-  getLaunches(): Observable<any[]> {
+  getLaunches(): Observable<Launch[]> {
     const query = {
       query: `
      {
@@ -51,9 +54,11 @@ export class GraphQLService {
     `
     };
 
-    return this.http.post<any[]>(this.API_URL, query, {
+    return this.http.post<GqlResponse>(this.API_URL, query, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
+    }).pipe(
+      map(response => response.data.launches)
+    );
   }
 
 }

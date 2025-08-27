@@ -1,19 +1,23 @@
-.launches-table {
-  width: 100%;
-  border-collapse: collapse;
+.container {
+  padding: 2rem;
 }
 
-.launches-table th,
-.launches-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
 }
 
-.launches-table th {
-  background-color: #f4f4f4;
+.error-container {
+  padding: 2rem;
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+  border-radius: 4px;
+  text-align: center;
 }
 
-.launches-table tr:nth-child(odd) {
-  background-color: #f9f9f9;
+.table-container {
+  margin-top: 2rem;
 }

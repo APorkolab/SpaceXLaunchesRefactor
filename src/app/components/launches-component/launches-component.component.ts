@@ -1,31 +1,40 @@
-interface LaunchesResponse {
-  data: {
-    launches: any[]; // Itt pontosíthatja a 'launches' tömb elemeinek típusát
-  };
-}
-
-// launches.component.ts
-import { Component, OnInit } from '@angular/core';
-import { GraphQLService } from 'src/app/services/graph-qlservice.service';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Launch } from 'src/app/core/models/launch.model';
+import { LaunchStateService } from 'src/app/services/launch-state.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-launches',
   templateUrl: './launches-component.component.html',
   styleUrls: ['./launches-component.component.css']
 })
-export class LaunchesComponent implements OnInit {
-  launches: any[] = [];
+export class LaunchesComponent implements OnInit, AfterViewInit {
+  loading$: Observable<boolean>;
+  error$: Observable<any>;
 
-  constructor(private graphQLService: GraphQLService) { }
+  displayedColumns: string[] = ['mission_name', 'launch_year', 'rocket_name', 'launch_site'];
+  dataSource = new MatTableDataSource<Launch>();
 
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit() {
-    this.graphQLService.getLaunches().subscribe((response: any) => {
-      const launchesResponse = response as LaunchesResponse; // Típus-állítás
-      this.launches = launchesResponse.data.launches;
-    }, error => {
-      console.error('Hiba a kilövések lekérdezése közben:', error);
-    });
+  constructor(private launchStateService: LaunchStateService) {
+    this.loading$ = this.launchStateService.loading$;
+    this.error$ = this.launchStateService.error$;
   }
 
+  ngOnInit() {
+    this.launchStateService.launches$.subscribe(launches => {
+      this.dataSource.data = launches;
+    });
+    this.launchStateService.fetchLaunches();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
 }
