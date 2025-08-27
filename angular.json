@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "spaceX:build:production"
+              "buildTarget": "spaceX:build:production"
             },
             "development": {
-              "browserTarget": "spaceX:build:development"
+              "buildTarget": "spaceX:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "spaceX:build"
+            "buildTarget": "spaceX:build"
           }
         },
         "test": {
