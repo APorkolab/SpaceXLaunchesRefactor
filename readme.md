@@ -11,7 +11,7 @@ This is an Angular application designed to display launch data from the SpaceX A
 
 ## Tech Stack
 
-- **Angular 16**: A powerful framework for building dynamic web applications.
+- **Angular 20**: A powerful framework for building dynamic web applications.
 - **TypeScript**: For strong typing and improved code quality.
 - **RxJS**: For reactive programming and managing asynchronous operations.
 - **Angular Material**: For a high-quality, pre-built set of UI components.

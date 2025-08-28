@@ -7,9 +7,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-launches',
-  templateUrl: './launches-component.component.html',
-  styleUrls: ['./launches-component.component.css']
+    selector: 'app-launches',
+    templateUrl: './launches-component.component.html',
+    styleUrls: ['./launches-component.component.css'],
+    standalone: false
 })
 export class LaunchesComponent implements OnInit, AfterViewInit {
   loading$: Observable<boolean>;
